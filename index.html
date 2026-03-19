@@ -3,241 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Főoldal</title>
-  <link rel="icon" type="image/png" href="yt_logo_lila.png">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(circle, rgba(72,0,128,0.25) 0%, rgba(0,0,0,0.85) 100%), 
-                  url('https://www.transparenttextures.com/patterns/stardust.png');
-      background-blend-mode: overlay;
-      opacity: 0.55;
-      z-index: -1;
-      animation: stars 180s linear infinite;
-    }
-    @keyframes stars {
-      from { background-position: 0 0; }
-      to { background-position: 12000px 12000px; }
-    }
-    header {
-      width: 100%;
-      padding: 1.5rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0,0,0,0.9);
-      box-shadow: 0 0 20px #bb33ff, 0 0 40px #9933ff inset;
-      border-bottom: 2px solid #bb33ff;
-      position: relative;
-      z-index: 1;
-    }
-    header h1 {
-      font-size: 2rem;
-      color: #bb33ff;
-      text-shadow: 0 0 10px #bb33ff, 0 0 25px #9933ff;
-      margin: 0;
-    }
-    header nav a {
-      display: inline-block;
-      padding: 0.7rem 1.8rem;
-      margin-left: 20px;
-      color: #e0aaff;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 2px solid #e0aaff;
-      border-radius: 15px;
-      background: rgba(0,0,0,0.25);
-      transition: all 0.4s ease-in-out;
-      box-shadow: 0 0 10px #e0aaff, 0 0 20px #e0aaff inset;
-      position: relative;
-      overflow: hidden;
-    }
-    header nav a:hover {
-      color: #000;
-      background: #e0aaff;
-      box-shadow: 0 0 25px #e0aaff, 0 0 50px #d080ff inset;
-      transform: scale(1.08);
-    }
-    .container {
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 3rem;
-      background: rgba(0,0,0,0.55);
-      border-radius: 20px;
-      box-shadow: 0 0 25px #bb33ff, 0 0 25px #9933ff;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.99); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .main-content {
-      flex: 2;
-      min-width: 300px;
-    }
-    .sidebar {
-      flex: 1;
-      min-width: 300px;
-    }
-    h2 {
-      color: #bb33ff;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px #bb33ff;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: #c0c0ff;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      margin-top: 1rem;
-      box-shadow: 0 0 15px #bb33ff, 0 0 15px #9933ff;
-    }
-    .watermark {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.5rem;
-      color: #bb33ff;
-      font-weight: bold;
-      text-shadow: 0 0 5px #bb33ff, 0 0 15px #9933ff;
-      animation: neonPulse 2s infinite;
-      z-index: 999;
-      user-select: none;
-    }
-    @keyframes neonPulse {
-      0%, 100% {
-        text-shadow: 0 0 5px #bb33ff, 0 0 15px #9933ff;
-        opacity: 0.85;
-      }
-      50% {
-        text-shadow: 0 0 12px #bb33ff, 0 0 25px #9933ff;
-        opacity: 1;
-      }
-    }
-    .video-thumbnail {
-      position: relative;
-      cursor: pointer;
-      width: 100%;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 0 15px #bb33ff, 0 0 15px #9933ff;
-      transition: transform 0.3s;
-    }
-    .video-thumbnail:hover {
-      transform: scale(1.03);
-    }
-    .video-thumbnail img {
-      width: 100%;
-      display: block;
-    }
-    .video-thumbnail .play-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/3/3c/Red_YouTube_play_button.svg') no-repeat center center;
-      background-size: contain;
-      pointer-events: none;
-    }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 1.5rem;
-      }
-      header nav {
-        margin-top: 1rem;
-        width: 100%;
-      }
-      header nav a {
-        display: block;
-        margin-left: 0;
-        margin-bottom: 10px;
-        width: fit-content;
-      }
-      .container {
-        padding: 2rem;
-        margin: 2rem auto;
-        flex-direction: column;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+
+  <!-- ═══ SEO ═══════════════════════════════════════════════════ -->
+  <title>balazs734 - Gaming · Tech · Vlog</title>
+  <meta name="description" content="Balázs vagyok, magyar gaming, tech és vlog YouTuber. Nézd meg a legújabb videóimat, és csatlakozz a közösséghez!">
+  <meta name="keywords"    content="balazs734, gaming, tech, vlog, youtube, twitch, magyar, streamer">
+  <meta name="author"      content="balazs734">
+  <meta name="robots"      content="index, follow">
+  <link rel="canonical"    href="https://balazs734.hu/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://balazs734.hu/">
+  <meta property="og:title"       content="balazs734 - Gaming · Tech · Vlog">
+  <meta property="og:description" content="Magyar gaming, tech és vlog tartalmak. Nézd meg a legújabb videókat és csatlakozz a közösséghez!">
+  <meta property="og:locale"      content="hu_HU">
+  <meta property="og:site_name"   content="balazs734">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="balazs734 - Gaming · Tech · Vlog">
+  <meta name="twitter:description" content="Magyar gaming, tech és vlog tartalmak. Nézd meg a legújabb videókat!">
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <link rel="icon"       type="image/png" sizes="512x512" href="favicon.png">
+  <link rel="icon"       type="image/png" sizes="32x32"  href="favicon-32.png">
+  <link rel="apple-touch-icon"            sizes="512x512" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="watermark">@balazs734</div>
-  <header>
-    <h1>FŐOLDAL</h1>
-    <nav>
-      <a href="setup.html">Setup</a>
-      <a href="https://discord.com/invite/" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://yt.balazs734.hu" target="_blank" rel="noopener noreferrer">YouTube</a>
-    </nav>
-  </header>
 
-  <div class="container">
-    <div class="main-content">
-      <h2>Üdvözöllek a weboldalamon 👋</h2>
-      <p><strong>Balázs vagyok.</strong></p>
-      <p>
-        A célom az, hogy egy nagyszerű közösséget építsek, főként gaming és tech témákban. 
-        Már régóta foglalkozom a YouTube világával, és mostanra értem el arra a szintre, 
-        hogy élvezhető, igényes tartalmakat tudjak gyártani. 🎥<br><br>
-        Ha szeretnél része lenni a közösségemnek, iratkozz fel, és tarts velem a jövőben is! 🎮
+<div class="bg">
+  <div class="bg-orb1"></div>
+  <div class="bg-orb2"></div>
+  <div class="bg-lines"></div>
+</div>
+
+<div class="watermark">@balazs734</div>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" onclick="showPage('home')">balazs<em>734</em></a>
+  <div class="header-right">
+    <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+    <nav id="mainNav">
+      <button class="nav-tab active" id="tab-home" onclick="showPage('home')">
+        <i class="fa-solid fa-house"></i> Főoldal
+      </button>
+      <button class="nav-tab" id="tab-setup" onclick="showPage('setup')">
+        <i class="fa-solid fa-microchip"></i> Setup
+      </button>
+      <div class="nav-sep"></div>
+      <a href="https://www.youtube.com/@balazs734" target="_blank" rel="noopener" class="nav-ext yt">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+      <a href="https://www.twitch.tv/balazs734" target="_blank" rel="noopener" class="nav-ext tw">
+        <i class="fa-brands fa-twitch"></i> Twitch
+      </a>
+      <a href="https://discord.com/invite/" target="_blank" rel="noopener" class="nav-ext dc">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HOME -->
+<div id="page-home" class="active">
+  <div class="home-wrap">
+
+    <div class="hero-section">
+      <h1 class="hero-title">Szia, <span class="hi">Balázs</span> vagyok —<br>üdvözöllek az oldalamon.</h1>
+      <p class="hero-desc">
+        Évek óta készítek gaming, tech és vlog tartalmakat a YouTube-ra, emellett
+        pedig Twitchen is szoktam élőzni. Igyekszem mindig olyan videókat összehozni,
+        amik nektek is <strong>hasznosak vagy szórakoztatóak</strong>, és amikkel nem
+        csak felvételeket, hanem valódi élményt adhatok. Ha te is szereted az ilyen
+        videókat, iratkozz fel, és tarts velem a következő alkalommal is!
       </p>
 
-      <h2>Legújabb videóm:</h2>
-      <a class="video-thumbnail" href="https://www.youtube.com/watch?v=U870G8wI-CQ&t=27s" target="_blank">
-        <img src="https://img.youtube.com/vi/U870G8wI-CQ/maxresdefault.jpg" alt="YouTube videó előnézeti kép">
-        <div class="play-button"></div>
+
+      <div class="topics">
+        <span class="topic-chip"><i class="fa-solid fa-gamepad"></i> Gaming</span>
+        <span class="topic-chip"><i class="fa-solid fa-microchip"></i> Tech</span>
+        <span class="topic-chip"><i class="fa-solid fa-video"></i> Vlog</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="https://www.youtube.com/@balazs734" target="_blank" rel="noopener" class="btn btn-yt">
+          <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+        <a href="https://www.twitch.tv/balazs734" target="_blank" rel="noopener" class="btn btn-tw">
+          <i class="fa-brands fa-twitch"></i> Twitch
+        </a>
+        <a href="https://discord.com/invite/" target="_blank" rel="noopener" class="btn btn-dc">
+          <i class="fa-brands fa-discord"></i> Discord
+        </a>
+      </div>
+
+      <div class="section-label">Legújabb videóm</div>
+      <a class="video-card" id="videoCard" href="https://www.youtube.com/@balazs734" target="_blank" rel="noopener">
+        <div class="video-thumb-wrap">
+          <div class="loading-thumb" id="thumbLoading"><i class="fa-brands fa-youtube"></i></div>
+          <img id="videoThumb" src="" alt="Legújabb videó">
+          <div class="video-overlay">
+            <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <div class="video-title-text" id="videoTitle">Betöltés…</div>
+          <div class="video-sub" id="videoSub"></div>
+        </div>
       </a>
+
+      <div class="section-label" style="margin-top:1.8rem">Legnépszerűbb videóim</div>
+      <div class="archive-grid" id="archiveGrid">
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+        <div class="archive-skeleton"><div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-val" id="subCount">—</span>
+          <span class="stat-key">Feliratkozó</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="viewCount">—</span>
+          <span class="stat-key">Megtekintés</span>
+        </div>
+        <div class="stat-topics">
+          <span class="stat-key">Témák</span>
+          <div class="stat-topics-vals">
+            <span class="stat-topic-val">Gaming</span>
+            <span class="stat-topic-val">Tech</span>
+            <span class="stat-topic-val">Vlog</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Sidebar -->
     <div class="sidebar">
-      <h2>Csatlakozz a Discord közösséghez:</h2>
-      <iframe src="https://discord.com/widget?id=1220741268070596679&theme=dark" 
-              width="100%" 
-              height="500" 
-              allowtransparency="true" 
-              frameborder="0" 
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-      </iframe>
+      <div class="sidebar-card">
+        <div class="sidebar-head">
+          <i class="fa-brands fa-discord"></i>
+          <span>Discord közösség</span>
+        </div>
+        <iframe src="https://discord.com/widget?id=1220741268070596679&theme=dark"
+                height="458" allowtransparency="true" frameborder="0"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SETUP -->
+<div id="page-setup">
+  <div class="setup-wrap">
+    <div class="setup-hd">
+      <h1>Setupom</h1>
+      <p>Minden cucc amivel dolgozom — PC, szoftverek, perifériák. Linkek is vannak, ha valamelyik megtetszik.</p>
+    </div>
+    <div class="setup-grid">
+
+      <div class="setup-panel">
+        <div class="panel-head"><i class="fa-solid fa-desktop"></i><h2>PC</h2></div>
+        <div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-microchip"></i>Processzor</span><span class="spec-val"><a href="https://www.arukereso.hu/processzor-c3139/intel/core-i5-12400f-6-core-2-5ghz-lga1700-box-bx8071512400f-p755226858/" target="_blank">Intel i5-12400F</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-display"></i>Videókártya</span><span class="spec-val"><a href="https://www.techpowerup.com/gpu-specs/asus-ats-rtx-3070-gaming-megalodon-oc-lhr.b9529" target="_blank">ASUS RTX 3070</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-server"></i>Alaplap</span><span class="spec-val"><a href="https://www.arukereso.hu/alaplap-c3128/msi/pro-h610m-g-ddr4-p765691146/" target="_blank">MSI PRO H610M-E DDR4</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-memory"></i>RAM</span><span class="spec-val"><a href="https://www.arukereso.hu/memoria-modul-c3577/g-skill/aegis-16gb-2x8gb-ddr4-3200mhz-f4-3200c16d-16gis-p505099300/" target="_blank">G.Skill Aegis 16GB</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-hard-drive"></i>SSD</span><span class="spec-val"><a href="https://belso-ssd-meghajto.arukereso.hu/western-digital/blue-sn580-1tb-m-2-wds100t3b0e-p979435629/" target="_blank">WD Black 500GB NVMe</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-database"></i>HDD</span><span class="spec-val"><a href="https://www.pcx.hu/seagate-barracuda-3-5-2000gb-belso-sataiii-7200rpm-256mb-winchester-st2000dm008-281353" target="_blank">Seagate Barracuda 500GB</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-plug"></i>Tápegység</span><span class="spec-val"><a href="https://www.arukereso.hu/tapegyseg-c3158/deepcool/pf650-650w-80-plus-r-pf650d-ha0b-p763919622/" target="_blank">Deepcool 650W</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-box-open"></i>Ház</span><span class="spec-val"><a href="https://ipon.hu/shop/termek/zalman-i3-neo-feher/2187534" target="_blank">Zalman I3 NEO Fehér</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-brands fa-windows"></i>OS</span><span class="spec-val"><a href="https://www.microsoft.com/hu-hu/software-download/windows10" target="_blank">Windows 10</a></span></div>
+        </div>
+      </div>
+
+      <div class="setup-panel">
+        <div class="panel-head"><i class="fa-solid fa-wand-magic-sparkles"></i><h2>Szoftverek</h2></div>
+        <div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-film"></i>Videóvágó</span><span class="spec-val"><a href="https://www.adobe.com/hu/products/premiere.html" target="_blank">Adobe Premiere Pro 25</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-image"></i>Képszerkesztő</span><span class="spec-val"><a href="https://www.adobe.com/hu/products/photoshop.html" target="_blank">Adobe Photoshop 25</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-circle-dot"></i>Felvevő</span><span class="spec-val"><a href="https://obsproject.com/" target="_blank">OBS Studio</a></span></div>
+        </div>
+      </div>
+
+      <div class="setup-panel">
+        <div class="panel-head"><i class="fa-solid fa-gamepad"></i><h2>Perifériák</h2></div>
+        <div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-keyboard"></i>Billentyűzet</span><span class="spec-val"><a href="https://www.arukereso.hu/billentyuzet-c3111/redragon/kumara-rgb-k552rgb-1redhu-p325128521/" target="_blank">Redragon Kumara RGB</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-computer-mouse"></i>Egér</span><span class="spec-val"><a href="https://eger.arukereso.hu/vxe/r1-pro-white-p1052032792/" target="_blank">VXE R1 Pro White</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-desktop"></i>Monitor 1</span><span class="spec-val"><a href="https://www.arukereso.hu/monitor-c3126/lg/ultragear-24gq50f-b-p882495171/" target="_blank">LG Ultragear 24GQ50F-B</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-desktop"></i>Monitor 2</span><span class="spec-val"><a href="https://www.arukereso.hu/monitor-c3126/acer/x192w-p15989443/" target="_blank">Acer X192W</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-headphones"></i>Fejhallgató</span><span class="spec-val"><a href="https://www.arukereso.hu/fulhallgato-fejhallgato-c3109/steelseries/arctis-7p-61471-p734386083/" target="_blank">SteelSeries Arctis 7P</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-brands fa-playstation"></i>Kontroller 1</span><span class="spec-val"><a href="https://www.konzolvilag.hu/playstation5/playstation-5-ps5-dualsense-controller-cosmic-red" target="_blank">DualSense Cosmic Red</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-brands fa-playstation"></i>Kontroller 2</span><span class="spec-val"><a href="https://www.konzolvilag.hu/playstation5/playstation-5-ps5-dualsense-controller-white-black" target="_blank">DualSense White/Black</a></span></div>
+          <div class="spec-row"><span class="spec-key"><i class="fa-solid fa-microphone"></i>Mikrofon</span><span class="spec-val"><a href="https://szamitogep-mikrofon.arukereso.hu/fifine-microphone/a6v-p934240887/" target="_blank">Fifine A6V</a></span></div>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">balazs<em>734</em></div>
+  <div class="footer-links">
+    <a href="https://www.youtube.com/@balazs734" target="_blank" rel="noopener" class="footer-link yt"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a href="https://www.twitch.tv/balazs734"    target="_blank" rel="noopener" class="footer-link tw"><i class="fa-brands fa-twitch"></i> Twitch</a>
+    <a href="https://discord.com/invite/"        target="_blank" rel="noopener" class="footer-link dc"><i class="fa-brands fa-discord"></i> Discord</a>
+  </div>
+  <div class="footer-copy">&copy; <span id="yr"></span> balazs734 &mdash; Gaming · Tech · Vlog &mdash; Minden jog fenntartva.</div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
